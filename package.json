@@ -1,0 +1,21 @@
+{
+  "name": "help-center-search-check",
+  "version": "0.1.0",
+  "description": "When people type a question into a help center, does the right article come up? Keyword search, a local AI model and a hybrid scored on 1,201 questions.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "download": "sh scripts/0-download.sh",
+    "prepare-data": "cd work && python3 ../scripts/1-prepare.py",
+    "embed": "cd work && node ../scripts/2-embed.mjs",
+    "search": "cd work && python3 ../scripts/3-search.py",
+    "export": "cd work && python3 ../scripts/4-export.py",
+    "serve": "python3 -m http.server 8000"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@energetic-ai/core": "^0.2.0",
+    "@energetic-ai/embeddings": "^0.2.0",
+    "@energetic-ai/model-embeddings-en": "^0.2.0"
+  }
+}
