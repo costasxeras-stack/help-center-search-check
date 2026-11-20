@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Help Center Search Check</title>
+<meta name="description" content="When people type a question into a help center, does the right article come up? Keyword search, a local AI model and a hybrid scored on 1,201 questions and 7,117 help articles.">
+<meta name="theme-color" content="#f6f7f5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f766e'/%3E%3Ccircle cx='14' cy='14' r='6' fill='none' stroke='white' stroke-width='2.4'/%3E%3Cpath d='M18.5 18.5l5 5' stroke='white' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f7f5; --card:#fff; --ink:#161a19; --muted:#56605d; --faint:#87918e; --line:#e1e6e3;
+  --accent:#0f766e; --accent-soft:#e3f2ef; --kw:#9a6b1f; --ai:#4f46e5; --hy:#0f766e;
+  --good:#0f766e; --bad:#b4472f; --unrated:#87918e;
+  --display:"Literata",Georgia,serif; --body:"Inter",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+header.top{border-bottom:1px solid var(--line);background:#fff}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;height:60px}
+.brand{white-space:nowrap;font-family:var(--display);font-weight:700;font-size:18px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px}
+.brand i{width:22px;height:22px;border-radius:6px;background:var(--accent);display:inline-block}
+.top nav{display:flex;gap:18px;font-size:14.5px}
+.top nav a{color:var(--muted);text-decoration:none;white-space:nowrap}
+.intro{padding:40px 0 24px}
+.ver{font:600 12.5px var(--body);color:var(--accent);background:var(--accent-soft);padding:3px 9px;border-radius:999px}
+.intro h1{font-size:clamp(30px,4.6vw,48px);line-height:1.08;margin-top:14px;max-width:22ch}
+.intro p{color:var(--muted);font-size:18px;max-width:70ch;margin:14px 0 0}
+section.block{margin-top:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+.card h2{font-size:26px}
+.sub{color:var(--muted);font-size:15px;margin:6px 0 0;max-width:74ch}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+.stat b{display:block;font:700 40px/1 var(--display)}
+.stat span{display:block;color:var(--muted);font-size:14.5px;margin-top:8px}
+.stat small{display:block;color:var(--faint);font-size:13px;margin-top:6px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:14px;flex-wrap:wrap}
+.seg button{border:0;background:#fff;padding:8px 13px;font:600 13.5px var(--body);color:var(--muted);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:14px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}
+th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:600}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.best td{background:var(--accent-soft)}
+.note{font-size:13.5px;color:var(--faint);margin-top:12px}
+.chart{display:grid;gap:16px;margin-top:18px}
+.grp b{display:block;font-size:14px;margin-bottom:6px}
+.grp b small{font-weight:400;color:var(--faint)}
+.row{display:grid;grid-template-columns:120px 1fr 54px;gap:10px;align-items:center;font-size:13.5px;color:var(--muted);margin-top:4px}
+.bar{height:14px;border-radius:7px;background:#eef1ef;position:relative}
+.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:7px}
+.row .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}
+.conf{display:grid;grid-template-columns:repeat(9,1fr);gap:8px;margin-top:18px;align-items:end;}
+.col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px;font-size:12.5px;color:var(--muted)}
+.col .cv{font-weight:600;color:var(--ai);font-variant-numeric:tabular-nums}
+.col .pair{display:flex;gap:3px;align-items:flex-end;width:100%;justify-content:center}
+.col .pair i{display:block;width:40%;max-width:22px;border-radius:4px 4px 0 0}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px;color:var(--muted);margin-top:12px}
+.legend span::before{content:"";display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px;background:var(--c)}
+.q{font:600 19px/1.35 var(--display);margin-top:16px}
+.lists{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.list{border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.list h3{font:600 14px var(--body);margin-bottom:8px}
+.list ol{margin:0;padding-left:20px;font-size:13.5px;display:grid;gap:8px;color:var(--ink)}
+.list li small{display:block;color:var(--faint);font-size:12px;margin-top:2px}
+.tag{display:inline-block;font:600 11.5px var(--body);padding:1px 7px;border-radius:999px;margin-right:6px}
+.tag.good{background:var(--accent-soft);color:var(--good)}
+.tag.bad{background:#f9e9e4;color:var(--bad)}
+.tag.unrated{background:#eef1ef;color:var(--muted)}
+.btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 14px;font:600 14px var(--body);cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.ctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}
+footer{margin:44px 0 0;border-top:1px solid var(--line);background:#fff}
+footer .wrap{padding:22px 20px 34px;font-size:13.5px;color:var(--muted);display:grid;gap:6px}
+@media (max-width:900px){.lists{grid-template-columns:1fr}}
+@media (max-width:640px){.stats{grid-template-columns:1fr}.stat b{font-size:34px}.card{padding:18px}.intro p{font-size:16.5px}.top nav a.hide-sm{display:none}.row{grid-template-columns:84px 1fr 46px}th,td{padding:9px 5px;font-size:13.5px}.hide-sm-col{display:none}th.wr{white-space:normal;max-width:70px}td:first-child{min-width:0}.conf{gap:3px}.col{font-size:11px}}
+@media (max-width:420px){.brand{font-size:16px}.top nav{gap:12px;font-size:13.5px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><i aria-hidden="true"></i>Help Center Search Check</a>
+    <nav>
+      <a href="https://github.com/costasxeras-stack/help-center-search-check/blob/main/docs/case-study.md">Case study</a>
+      <a class="hide-sm" href="https://github.com/costasxeras-stack/help-center-search-check">GitHub</a>
+      <a href="https://kostasxeras.com/">Portfolio</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <span class="ver">v0.1.0</span>
+    <h1>When people ask a help center a question, does the right answer come up?</h1>
+    <p id="lead">Help articles from public sites, questions written by people in their own words, and ratings from people of which articles answer them. Five ways to search, scored on the same questions.</p>
+  </section>
+
+  <section class="block stats" id="stats" aria-label="Headline results"></section>
+
+  <section class="block card">
+    <h2>Five ways to search</h2>
+    <p class="sub">For each question, the top results of each method are checked against the people's ratings. Only some articles were rated for each question, so an unrated result has no verdict. The two views below set the range.</p>
+    <div class="seg" role="group" aria-label="How to count unrated results">
+      <button type="button" data-v="strict" aria-pressed="true">Unrated counts as wrong</button>
+      <button type="button" data-v="rated" aria-pressed="false">Skip unrated results</button>
+    </div>
+    <div style="overflow-x:auto"><table>
+      <thead><tr><th>Method</th><th class="n wr">First result good</th><th class="n wr">Good in top 3</th><th class="n hide-sm-col">Top 3 rated at all</th></tr></thead>
+      <tbody id="tbl"></tbody>
+    </table></div>
+    <p class="note" id="tbl-note"></p>
+  </section>
+
+  <section class="block card">
+    <h2>Different words are where search fails</h2>
+    <p class="sub">Questions grouped by how many of their words appear in the question of a good article. Share with a good answer in the top 3, unrated counted as wrong.</p>
+    <div class="chart" id="wording"></div>
+    <div class="legend"><span style="--c:var(--kw)">Keyword</span><span style="--c:var(--ai)">AI meaning</span><span style="--c:var(--hy)">Hybrid</span></div>
+  </section>
+
+  <section class="block card">
+    <h2>Can the score tell when to say "no good answer"?</h2>
+    <p class="sub">Show the first result only when the method's score is among its highest, and send the rest to "contact us". Bars: share of shown first results rated good, unrated counted as wrong. The number on top is AI meaning.</p>
+    <div class="conf" id="conf"></div>
+    <div class="legend"><span style="--c:var(--kw)">Keyword</span><span style="--c:var(--ai)">AI meaning</span></div>
+    <p class="note" id="conf-note"></p>
+  </section>
+
+  <section class="block card">
+    <h2>One question at a time</h2>
+    <p class="sub">A question picked at random, and the top 3 articles from three methods with the people's rating.</p>
+    <div class="ctl"><button class="btn primary" id="next">Show another question</button><span class="note" id="qn" style="margin:0"></span></div>
+    <p class="q" id="qtext"></p>
+    <div class="lists" id="lists"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Built by <a href="https://kostasxeras.com/">Konstantinos Xeras</a> with Claude (Anthropic) as engineering partner. <a href="https://github.com/costasxeras-stack/help-center-search-check">Code and results on GitHub</a>.</span>
+    <span>Data: COUGH by Zhang, Sun, Yue, Lin and Sun (EMNLP 2021), CC BY-NC-SA 4.0, research and education use only. Help articles come from <a href="https://github.com/sunlab-osu/covid-faq/blob/master/List_of_websites.txt">56 public sources</a> and date from 2020. The questions were written by people rewording existing FAQ items, not taken from search logs. This page tests search. It is not health advice.</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var pct = function (x, d) { return (x * 100).toFixed(d == null ? 1 : d) + '%'; };
+  var fmt = function (n) { return n.toLocaleString('en'); };
+  var D, view = 'strict', qi = -1;
+  var SHORT = { kw_q: 'Keyword', ai_q: 'AI meaning', hybrid: 'Hybrid' };
+  fetch('data/results.json').then(function (r) { return r.json(); }).then(function (d) { D = d; init(); })
+    .catch(function () { $('stats').innerHTML = '<div class="stat">The results could not load. Refresh the page.</div>'; });
+
+  function m(k) { return D.methods.filter(function (x) { return x.key === k; })[0]; }
+  function init() {
+    $('lead').textContent = fmt(D.articles) + ' help articles from ' + D.sources + ' public sources, ' + fmt(D.questions) + ' questions written by people in their own words, and ' + fmt(D.judgedPairs) + ' ratings from people of which articles answer them. Five ways to search, scored on the same questions.';
+    var kw = m('kw_q'), ai = m('ai_q'), hy = m('hybrid'), w = D.wording[0], c = D.confidence.ai_q[D.confidence.ai_q.length - 1];
+    $('stats').innerHTML =
+      stat(pct(hy.strict3, 0) + ' to ' + pct(hy.rated3, 0), 'of questions get a good answer in the hybrid\'s top 3', 'Keyword alone: ' + pct(kw.strict3, 0) + ' to ' + pct(kw.rated3, 0) + '. The range comes from unrated results.') +
+      stat(pct(w.hybrid, 0), 'for questions that share under a third of their words with a good article', fmt(w.questions) + ' questions. Keyword alone: ' + pct(w.kw_q, 0) + '.') +
+      stat(pct(1 - c.good, 0), 'of first results are still not rated good when the AI shows only its most confident ' + pct(c.shown, 0), 'Showing every answer: ' + pct(1 - D.confidence.ai_q[0].good, 0) + '.');
+    table();
+    Array.prototype.forEach.call(document.querySelectorAll('.seg button'), function (b) {
+      b.addEventListener('click', function () {
+        view = b.getAttribute('data-v');
+        Array.prototype.forEach.call(document.querySelectorAll('.seg button'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        table();
+      });
+    });
+    $('wording').innerHTML = D.wording.map(function (g) {
+      return '<div class="grp"><b>' + esc(g.label) + ' <small>(' + fmt(g.questions) + ' questions)</small></b>' +
+        row('Keyword', g.kw_q, 'var(--kw)') + row('AI meaning', g.ai_q, 'var(--ai)') + row('Hybrid', g.hybrid, 'var(--hy)') + '</div>';
+    }).join('');
+    var K = D.confidence.kw_q, A = D.confidence.ai_q;
+    $('conf').innerHTML = A.map(function (a, i) {
+      return '<div class="col"><span class="cv">' + pct(a.good, 0) + '</span><div class="pair"><i style="height:' + Math.round(K[i].good * 220) + 'px;background:var(--kw)" title="Keyword ' + pct(K[i].good) + '"></i><i style="height:' + Math.round(a.good * 220) + 'px;background:var(--ai)" title="AI meaning ' + pct(a.good) + '"></i></div>' +
+        '<span>' + pct(a.shown, 0) + '</span></div>';
+    }).join('');
+    $('conf-note').textContent = 'Labels under the bars: share of questions that get an answer shown. AI meaning goes from ' + pct(A[0].good, 0) + ' good with every answer shown to ' + pct(A[A.length - 1].good, 0) + ' at ' + pct(A[A.length - 1].shown, 0) + ' shown. The ' + (D.questions - D.scored) + ' questions with no article rated good have a median AI score of ' + D.medianTopNoGood.toFixed(3) + ', against ' + D.medianTopOthers.toFixed(3) + ' for the rest.';
+    $('next').addEventListener('click', nextQ); nextQ();
+  }
+  function table() {
+    var key = view === 'strict' ? ['strict1', 'strict3'] : ['rated1', 'rated3'];
+    var best = D.methods.reduce(function (b, x) { return x[key[1]] > b[key[1]] ? x : b; });
+    $('tbl').innerHTML = D.methods.map(function (x) {
+      return '<tr' + (x === best ? ' class="best"' : '') + '><td>' + esc(x.name) + '</td><td class="n">' + pct(x[key[0]]) + '</td><td class="n">' + pct(x[key[1]]) + '</td><td class="n hide-sm-col">' + pct(x.ratedShare, 0) + '</td></tr>';
+    }).join('');
+    $('tbl-note').textContent = (view === 'strict'
+      ? 'Unrated results count as wrong. This favours methods like the ones that picked which articles got rated. '
+      : 'Unrated results are skipped and the next rated one moves up. This is kinder to methods that find articles nobody rated. ') +
+      fmt(D.scored) + ' questions with at least one article rated good. Good: an average rating above 3 on a 1 to 4 scale.';
+  }
+  function nextQ() {
+    qi = (qi + 1) % D.browse.length;
+    var b = D.browse[qi];
+    $('qn').textContent = 'Question ' + (qi + 1) + ' of ' + D.browse.length + ' picked at random. ' + b.good + ' articles rated good for it.';
+    $('qtext').textContent = '"' + b.q + '"';
+    $('lists').innerHTML = ['kw_q', 'ai_q', 'hybrid'].map(function (k) {
+      return '<div class="list"><h3>' + SHORT[k] + '</h3><ol>' + b.res[k].map(function (r) {
+        var cls = r.r === 'good' ? 'good' : (r.r === 'not good' ? 'bad' : 'unrated');
+        var lab = r.r === 'good' ? 'Good' : (r.r === 'not good' ? 'Not good' : 'Not rated');
+        return '<li><span class="tag ' + cls + '">' + lab + '</span>' + esc(r.t) + '<small>' + esc(r.s) + '</small></li>';
+      }).join('') + '</ol></div>';
+    }).join('');
+  }
+  function stat(b, s, sm) { return '<div class="stat"><b>' + b + '</b><span>' + s + '</span><small>' + sm + '</small></div>'; }
+  function row(l, v, c) { return '<div class="row"><span>' + l + '</span><div class="bar"><i style="width:' + (v * 100) + '%;background:' + c + '"></i></div><span class="v">' + pct(v, 0) + '</span></div>'; }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+Keyword, question only             strict 39.2% 58.0% | rated only 42.6% 66.0% | top 3 rated 76.1%
+Keyword, question and answer       strict 34.6% 53.9% | rated only 39.0% 63.5% | top 3 rated 70.6%
+AI meaning, question only          strict 40.0% 56.5% | rated only 48.3% 71.3% | top 3 rated 57.6%
+AI meaning, question and answer    strict 30.5% 51.8% | rated only 42.0% 67.8% | top 3 rated 55.1%
+Hybrid (keyword + AI)              strict 40.5% 63.9% | rated only 46.0% 73.1% | top 3 rated 73.4%
+wording {'label': 'Under a third', 'questions': 401, 'kw_q': 0.2718204488778055, 'ai_q': 0.3541147132169576, 'hybrid': 0.40399002493765584}
+wording {'label': 'A third to two thirds', 'questions': 523, 'kw_q': 0.6730401529636711, 'ai_q': 0.5908221797323135, 'hybrid': 0.7074569789674953}
+wording {'label': 'Two thirds or more', 'questions': 277, 'kw_q': 0.851985559566787, 'ai_q': 0.8194945848375451, 'hybrid': 0.851985559566787}
+confidence kw_q [(1.0, 0.381), (0.9, 0.407), (0.8, 0.428), (0.7, 0.454), (0.6, 0.488), (0.5, 0.515), (0.4, 0.547), (0.3, 0.577), (0.2, 0.566)]
+confidence ai_q [(1.0, 0.389), (0.9, 0.413), (0.8, 0.438), (0.7, 0.48), (0.6, 0.511), (0.5, 0.529), (0.4, 0.56), (0.3, 0.601), (0.2, 0.641)]
+AI top score median: no good answer 0.786 others 0.777
+sources 56 wrote data/results.json
