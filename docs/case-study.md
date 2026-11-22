@@ -85,4 +85,4 @@ Only 58% of the AI model's top 3 results were rated at all, against 76% for keyw
 
 ## My role
 
-I defined the question, chose the dataset, the methods and the two scoring views, and wrote the findings. Claude (Anthropic) wrote and ran the code with me.
+I defined the question, chose the dataset, the methods and the two scoring views, and wrote the findings.

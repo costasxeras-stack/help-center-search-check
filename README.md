@@ -48,9 +48,9 @@ Two things to know about this data:
 
 This project tests search. Nothing on the page is health advice.
 
-## How it was built
+## My role
 
-I framed the question, chose the methods and the two scoring views, and wrote the findings. Claude (Anthropic) was my engineering partner for the code. Decisions are recorded in [docs/decisions](docs/decisions).
+I framed the question, chose the methods and the two scoring views, and wrote the findings. Decisions are recorded in [docs/decisions](docs/decisions).
 
 ## Run it yourself
 
