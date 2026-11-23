@@ -2,6 +2,18 @@
 
 All notable changes to this project. Versions follow [docs/versioning.md](docs/versioning.md).
 
+## [0.2.0] - 2026-11-23
+
+### Changed
+- New design. The page opens on a help-center search widget: a real question in the search field and the top 3 articles from keyword, AI and hybrid search, each marked Good, Not good or Not rated. On phones one method shows at a time, with tabs.
+- The three headline results are one row of short findings under the widget instead of three tiles.
+- Own look for this app: help-desk violet, Figtree, round corners.
+
+### Added
+- Decision record 0004: open with the search widget.
+
+Data and results are unchanged.
+
 ## [0.1.0] - 2026-11-20
 
 First release.

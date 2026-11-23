@@ -5,92 +5,113 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Help Center Search Check</title>
 <meta name="description" content="When people type a question into a help center, does the right article come up? Keyword search, a local AI model and a hybrid scored on 1,201 questions and 7,117 help articles.">
-<meta name="theme-color" content="#f6f7f5">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f766e'/%3E%3Ccircle cx='14' cy='14' r='6' fill='none' stroke='white' stroke-width='2.4'/%3E%3Cpath d='M18.5 18.5l5 5' stroke='white' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#f5f3fa">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235b3cc4'/%3E%3Ccircle cx='14' cy='14' r='6' fill='none' stroke='white' stroke-width='2.4'/%3E%3Cpath d='M18.5 18.5l5 5' stroke='white' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,600;7..72,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f6f7f5; --card:#fff; --ink:#161a19; --muted:#56605d; --faint:#87918e; --line:#e1e6e3;
-  --accent:#0f766e; --accent-soft:#e3f2ef; --kw:#9a6b1f; --ai:#4f46e5; --hy:#0f766e;
-  --good:#0f766e; --bad:#b4472f; --unrated:#87918e;
-  --display:"Literata",Georgia,serif; --body:"Inter",system-ui,sans-serif;
+  --bg:#f5f3fa; --card:#fff; --ink:#241b35; --muted:#5a5068; --faint:#8a8298; --line:#e3deec;
+  --accent:#5b3cc4; --accent-soft:#ece7fb; --kw:#b07a12; --ai:#5b3cc4; --hy:#0e8a6b;
+  --good:#0e8a6b; --good-soft:#dff3ec; --bad:#c0392b; --bad-soft:#fae5e2; --unrated:#9a93a8;
+  --font:"Figtree",system-ui,sans-serif;
 }
 *{box-sizing:border-box}
 html,body{overflow-x:clip}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--font);-webkit-font-smoothing:antialiased}
 a{color:var(--accent)}
-h1,h2,h3{font-family:var(--display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+h1,h2,h3{margin:0;text-wrap:balance}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
-header.top{border-bottom:1px solid var(--line);background:#fff}
-header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;height:60px}
-.brand{white-space:nowrap;font-family:var(--display);font-weight:700;font-size:18px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px}
-.brand i{width:22px;height:22px;border-radius:6px;background:var(--accent);display:inline-block}
-.top nav{display:flex;gap:18px;font-size:14.5px}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;height:62px}
+.brand{white-space:nowrap;font-weight:800;font-size:18px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:9px}
+.brand i{width:26px;height:26px;border-radius:50%;background:var(--accent);display:inline-grid;place-items:center;color:#fff;font:800 15px var(--font);font-style:normal}
+.top nav{display:flex;gap:18px;font-size:15px}
 .top nav a{color:var(--muted);text-decoration:none;white-space:nowrap}
-.intro{padding:40px 0 24px}
-.ver{font:600 12.5px var(--body);color:var(--accent);background:var(--accent-soft);padding:3px 9px;border-radius:999px}
-.intro h1{font-size:clamp(30px,4.6vw,48px);line-height:1.08;margin-top:14px;max-width:22ch}
-.intro p{color:var(--muted);font-size:18px;max-width:70ch;margin:14px 0 0}
-section.block{margin-top:22px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
-.card h2{font-size:26px}
+.top nav a:hover{color:var(--accent)}
+.intro{padding:30px 0 8px;max-width:760px}
+.intro h1{font-size:clamp(28px,4vw,42px);line-height:1.1;font-weight:800;letter-spacing:-.02em}
+.intro p{color:var(--muted);font-size:17px;margin:12px 0 0}
+.ver{color:var(--faint);font-size:14px}
+/* the help widget */
+.widget{margin-top:24px;background:var(--accent);border-radius:22px;padding:28px 28px 26px;color:#fff}
+.widget h2{font-size:22px;font-weight:800}
+.widget .wsub{color:#d9cffc;font-size:15px;margin:2px 0 0}
+.field{margin-top:18px;background:#fff;border-radius:14px;display:flex;align-items:center;gap:12px;padding:14px 18px;color:var(--ink);min-height:62px}
+.field svg{flex:none;width:22px;height:22px;color:var(--faint)}
+.field .qt{font-size:19px;font-weight:600;line-height:1.35}
+.field .caret{display:inline-block;width:2px;height:1.1em;background:var(--accent);vertical-align:-3px;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.wbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+.wbar .note{color:#d9cffc;margin:0;font-size:14px}
+.btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 16px;font:700 14.5px var(--font);cursor:pointer;color:var(--ink)}
+.btn.light{background:#fff;color:var(--accent);border-color:#fff}
+.lists{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+.list{background:#fff;color:var(--ink);border-radius:14px;padding:14px 16px;min-width:0}
+.list h3{font-size:15px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.list h3::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--c)}
+.list ol{margin:0;padding:0;list-style:none;display:grid;gap:10px;font-size:14.5px;counter-reset:r}
+.list li{display:grid;gap:4px;padding-left:12px;border-left:3px solid var(--line);line-height:1.35}
+.list li.good{border-left-color:var(--good)} .list li.bad{border-left-color:var(--bad)}
+.list li small{display:block;color:var(--faint);font-size:12.5px}
+.tag{justify-self:start;font:700 12px var(--font);padding:1px 8px;border-radius:999px}
+.tag.good{background:var(--good-soft);color:var(--good)}
+.tag.bad{background:var(--bad-soft);color:var(--bad)}
+.tag.unrated{background:#efecf4;color:var(--muted)}
+/* findings row */
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:26px;border-top:2px solid var(--ink)}
+.stat{padding:16px 18px 6px 0}
+.stat+.stat{padding-left:18px;border-left:1px solid var(--line)}
+.stat b{display:block;font:800 30px/1.1 var(--font);color:var(--accent);letter-spacing:-.02em}
+.stat span{display:block;font-size:15px;margin-top:6px;font-weight:600}
+.stat small{display:block;color:var(--muted);font-size:13.5px;margin-top:4px}
+section.block{margin-top:30px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+.card h2{font-size:23px;font-weight:800;letter-spacing:-.01em}
 .sub{color:var(--muted);font-size:15px;margin:6px 0 0;max-width:74ch}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
-.stat b{display:block;font:700 40px/1 var(--display)}
-.stat span{display:block;color:var(--muted);font-size:14.5px;margin-top:8px}
-.stat small{display:block;color:var(--faint);font-size:13px;margin-top:6px}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:14px;flex-wrap:wrap}
-.seg button{border:0;background:#fff;padding:8px 13px;font:600 13.5px var(--body);color:var(--muted);cursor:pointer}
+.seg{display:inline-flex;background:var(--bg);border-radius:999px;padding:4px;margin-top:14px;flex-wrap:wrap}
+.seg button{border:0;background:transparent;padding:8px 14px;border-radius:999px;font:700 13.5px var(--font);color:var(--muted);cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
-table{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:14px}
-th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}
-th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:15px;margin-top:14px}
+th,td{text-align:left;padding:11px 8px;border-bottom:1px solid var(--line)}
+th{font-size:13px;color:var(--muted);font-weight:700}
 td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-tr.best td{background:var(--accent-soft)}
+tr.best td{background:var(--accent-soft);font-weight:700}
 .note{font-size:13.5px;color:var(--faint);margin-top:12px}
-.chart{display:grid;gap:16px;margin-top:18px}
-.grp b{display:block;font-size:14px;margin-bottom:6px}
+.chart{display:grid;gap:18px;margin-top:18px}
+.grp b{display:block;font-size:15px;margin-bottom:6px}
 .grp b small{font-weight:400;color:var(--faint)}
-.row{display:grid;grid-template-columns:120px 1fr 54px;gap:10px;align-items:center;font-size:13.5px;color:var(--muted);margin-top:4px}
-.bar{height:14px;border-radius:7px;background:#eef1ef;position:relative}
-.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:7px}
-.row .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}
-.conf{display:grid;grid-template-columns:repeat(9,1fr);gap:8px;margin-top:18px;align-items:end;}
+.row{display:grid;grid-template-columns:110px 1fr 54px;gap:10px;align-items:center;font-size:14px;color:var(--muted);margin-top:5px}
+.bar{height:16px;border-radius:8px;background:#efecf4;position:relative}
+.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:8px}
+.row .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:700}
+.conf{display:grid;grid-template-columns:repeat(9,1fr);gap:8px;margin-top:18px;align-items:end}
 .col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px;font-size:12.5px;color:var(--muted)}
-.col .cv{font-weight:600;color:var(--ai);font-variant-numeric:tabular-nums}
+.col .cv{font-weight:700;color:var(--ai);font-variant-numeric:tabular-nums}
 .col .pair{display:flex;gap:3px;align-items:flex-end;width:100%;justify-content:center}
-.col .pair i{display:block;width:40%;max-width:22px;border-radius:4px 4px 0 0}
+.col .pair i{display:block;width:40%;max-width:22px;border-radius:6px 6px 0 0}
 .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px;color:var(--muted);margin-top:12px}
-.legend span::before{content:"";display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px;background:var(--c)}
-.q{font:600 19px/1.35 var(--display);margin-top:16px}
-.lists{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
-.list{border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
-.list h3{font:600 14px var(--body);margin-bottom:8px}
-.list ol{margin:0;padding-left:20px;font-size:13.5px;display:grid;gap:8px;color:var(--ink)}
-.list li small{display:block;color:var(--faint);font-size:12px;margin-top:2px}
-.tag{display:inline-block;font:600 11.5px var(--body);padding:1px 7px;border-radius:999px;margin-right:6px}
-.tag.good{background:var(--accent-soft);color:var(--good)}
-.tag.bad{background:#f9e9e4;color:var(--bad)}
-.tag.unrated{background:#eef1ef;color:var(--muted)}
-.btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 14px;font:600 14px var(--body);cursor:pointer}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-.ctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}
-footer{margin:44px 0 0;border-top:1px solid var(--line);background:#fff}
-footer .wrap{padding:22px 20px 34px;font-size:13.5px;color:var(--muted);display:grid;gap:6px}
-@media (max-width:900px){.lists{grid-template-columns:1fr}}
-@media (max-width:640px){.stats{grid-template-columns:1fr}.stat b{font-size:34px}.card{padding:18px}.intro p{font-size:16.5px}.top nav a.hide-sm{display:none}.row{grid-template-columns:84px 1fr 46px}th,td{padding:9px 5px;font-size:13.5px}.hide-sm-col{display:none}th.wr{white-space:normal;max-width:70px}td:first-child{min-width:0}.conf{gap:3px}.col{font-size:11px}}
-@media (max-width:420px){.brand{font-size:16px}.top nav{gap:12px;font-size:13.5px}}
+.legend span::before{content:"";display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px;background:var(--c)}
+.cols2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+footer{margin:44px 0 0}
+footer .wrap{padding:22px 20px 34px;font-size:13.5px;color:var(--muted);display:grid;gap:6px;border-top:1px solid var(--line)}
+@media (max-width:900px){.lists,.cols2{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){.widget{padding:20px 16px;border-radius:18px;margin-left:-8px;margin-right:-8px}.field .qt{font-size:17px}.stats{grid-template-columns:1fr}.stat+.stat{padding-left:0;border-left:0;border-top:1px solid var(--line)}.card{padding:18px}.top nav a.hide-sm{display:none}.row{grid-template-columns:84px 1fr 46px}th,td{padding:9px 5px;font-size:13.5px}.hide-sm-col{display:none}.conf{gap:3px}.col{font-size:11px}}
+@media (max-width:460px){.brand{font-size:16px}.top nav{gap:12px;font-size:14px}.top nav a.hide-xs{display:none}}
+.wtabs{display:none;background:rgba(255,255,255,.14);border-radius:999px;padding:4px;margin-top:14px}
+.wtabs button{flex:1;border:0;background:transparent;color:#fff;font:700 14px var(--font);padding:8px 6px;border-radius:999px;cursor:pointer}
+.wtabs button[aria-pressed="true"]{background:#fff;color:var(--accent)}
+@media (max-width:900px){.wtabs{display:flex}.lists .list{display:none}.lists .list.on{display:block}}
+@media (prefers-reduced-motion:reduce){.field .caret{animation:none}}
 </style>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="./"><i aria-hidden="true"></i>Help Center Search Check</a>
+    <a class="brand" href="./"><i aria-hidden="true">?</i>Help Center Search Check</a>
     <nav>
-      <a href="https://github.com/costasxeras-stack/help-center-search-check/blob/main/docs/case-study.md">Case study</a>
+      <a class="hide-xs" href="https://github.com/costasxeras-stack/help-center-search-check/blob/main/docs/case-study.md">Case study</a>
       <a class="hide-sm" href="https://github.com/costasxeras-stack/help-center-search-check">GitHub</a>
       <a href="https://kostasxeras.com/">Portfolio</a>
     </nav>
@@ -99,12 +120,20 @@ footer .wrap{padding:22px 20px 34px;font-size:13.5px;color:var(--muted);display:
 
 <main class="wrap">
   <section class="intro">
-    <span class="ver">v0.1.0</span>
     <h1>When people ask a help center a question, does the right answer come up?</h1>
     <p id="lead">Help articles from public sites, questions written by people in their own words, and ratings from people of which articles answer them. Five ways to search, scored on the same questions.</p>
   </section>
 
-  <section class="block stats" id="stats" aria-label="Headline results"></section>
+  <section class="widget" aria-label="One question at a time">
+    <h2>Try it the way a customer would</h2>
+    <p class="wsub">A real question from the test set and the top 3 articles from three search methods, with the people's rating.</p>
+    <div class="field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span class="qt" id="qtext" aria-live="polite"></span></div>
+    <div class="wbar"><p class="note" id="qn"></p><button class="btn light" id="next">Show another question</button></div>
+    <div class="wtabs" role="group" aria-label="Search method"><button type="button" data-k="kw_q" aria-pressed="false">Keyword</button><button type="button" data-k="ai_q" aria-pressed="false">AI meaning</button><button type="button" data-k="hybrid" aria-pressed="true">Hybrid</button></div>
+    <div class="lists" id="lists"></div>
+  </section>
+
+  <section class="stats" id="stats" aria-label="Headline results"></section>
 
   <section class="block card">
     <h2>Five ways to search</h2>
@@ -135,17 +164,12 @@ footer .wrap{padding:22px 20px 34px;font-size:13.5px;color:var(--muted);display:
     <p class="note" id="conf-note"></p>
   </section>
 
-  <section class="block card">
-    <h2>One question at a time</h2>
-    <p class="sub">A question picked at random, and the top 3 articles from three methods with the people's rating.</p>
-    <div class="ctl"><button class="btn primary" id="next">Show another question</button><span class="note" id="qn" style="margin:0"></span></div>
-    <p class="q" id="qtext"></p>
-    <div class="lists" id="lists"></div>
-  </section>
+
 </main>
 
 <footer>
   <div class="wrap">
+    <span class="ver">Version 0.2.0</span>
     <span>Built by <a href="https://kostasxeras.com/">Konstantinos Xeras</a>. <a href="https://github.com/costasxeras-stack/help-center-search-check">Code and results on GitHub</a>.</span>
     <span>Data: COUGH by Zhang, Sun, Yue, Lin and Sun (EMNLP 2021), CC BY-NC-SA 4.0, research and education use only. Help articles come from <a href="https://github.com/sunlab-osu/covid-faq/blob/master/List_of_websites.txt">56 public sources</a> and date from 2020. The questions were written by people rewording existing FAQ items, not taken from search logs. This page tests search. It is not health advice.</span>
   </div>
@@ -159,6 +183,24 @@ footer .wrap{padding:22px 20px 34px;font-size:13.5px;color:var(--muted);display:
   var fmt = function (n) { return n.toLocaleString('en'); };
   var D, view = 'strict', qi = -1;
   var SHORT = { kw_q: 'Keyword', ai_q: 'AI meaning', hybrid: 'Hybrid' };
+  var COLV = { kw_q: 'var(--kw)', ai_q: 'var(--ai)', hybrid: 'var(--hy)' };
+  var typed = false, tmr, wk = 'hybrid';
+  Array.prototype.forEach.call(document.querySelectorAll('.wtabs button'), function (b) {
+    b.addEventListener('click', function () {
+      wk = b.getAttribute('data-k');
+      Array.prototype.forEach.call(document.querySelectorAll('.wtabs button'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      Array.prototype.forEach.call(document.querySelectorAll('.lists .list'), function (l) { l.classList.toggle('on', l.getAttribute('data-k') === wk); });
+    });
+  });
+  // Type the first question once, then show later ones at once
+  function typeQ(q) {
+    var el = $('qtext'); clearInterval(tmr);
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (typed || reduce) { el.textContent = q; return; }
+    typed = true; var i = 0; el.innerHTML = '<span></span><i class="caret"></i>';
+    var sp = el.firstChild;
+    tmr = setInterval(function () { i++; sp.textContent = q.slice(0, i); if (i >= q.length) { clearInterval(tmr); el.textContent = q; } }, Math.min(28, 1500 / q.length));
+  }
   fetch('data/results.json').then(function (r) { return r.json(); }).then(function (d) { D = d; init(); })
     .catch(function () { $('stats').innerHTML = '<div class="stat">The results could not load. Refresh the page.</div>'; });
 
@@ -204,13 +246,13 @@ footer .wrap{padding:22px 20px 34px;font-size:13.5px;color:var(--muted);display:
   function nextQ() {
     qi = (qi + 1) % D.browse.length;
     var b = D.browse[qi];
-    $('qn').textContent = 'Question ' + (qi + 1) + ' of ' + D.browse.length + ' picked at random. ' + b.good + ' articles rated good for it.';
-    $('qtext').textContent = '"' + b.q + '"';
+    $('qn').textContent = 'Question ' + (qi + 1) + ' of ' + D.browse.length + ', picked at random. ' + b.good + ' articles rated good for it.';
+    typeQ(b.q);
     $('lists').innerHTML = ['kw_q', 'ai_q', 'hybrid'].map(function (k) {
-      return '<div class="list"><h3>' + SHORT[k] + '</h3><ol>' + b.res[k].map(function (r) {
+      return '<div class="list' + (k === wk ? ' on' : '') + '" data-k="' + k + '" style="--c:' + COLV[k] + '"><h3>' + SHORT[k] + '</h3><ol>' + b.res[k].map(function (r) {
         var cls = r.r === 'good' ? 'good' : (r.r === 'not good' ? 'bad' : 'unrated');
         var lab = r.r === 'good' ? 'Good' : (r.r === 'not good' ? 'Not good' : 'Not rated');
-        return '<li><span class="tag ' + cls + '">' + lab + '</span>' + esc(r.t) + '<small>' + esc(r.s) + '</small></li>';
+        return '<li class="' + cls + '"><span class="tag ' + cls + '">' + lab + '</span><span>' + esc(r.t) + '</span><small>' + esc(r.s) + '</small></li>';
       }).join('') + '</ol></div>';
     }).join('');
   }

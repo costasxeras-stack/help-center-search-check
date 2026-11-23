@@ -2,7 +2,7 @@
 
 **When people type a question into a help center, does the right article come up? Keyword search, a local AI model and a hybrid of both, scored on 1,201 questions and 7,117 help articles rated by people.**
 
-**Current version:** 0.1.0
+**Current version:** 0.2.0
 
 Live results: https://kostasxeras.com/help-center-search-check/
 

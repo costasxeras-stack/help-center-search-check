@@ -1,6 +1,6 @@
 {
   "name": "help-center-search-check",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "When people type a question into a help center, does the right article come up? Keyword search, a local AI model and a hybrid scored on 1,201 questions.",
   "private": true,
   "type": "module",
